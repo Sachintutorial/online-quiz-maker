@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizora | Online Quiz Maker</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+<header class="navbar">
+    <a href="#" class="logo" id="homeLogo">Quiz<span>ora.</span></a>
+    <nav>
+        <button class="nav-link" id="homeBtn">Home</button>
+        <button class="nav-link" id="browseBtn">Explore Quizzes</button>
+        <button class="nav-create" id="createBtn">+ Create Quiz</button>
+    </nav>
+</header>
+
+<main class="container">
+
+    <!-- HOME PAGE -->
+    <section id="homePage" class="page">
+        <div class="hero">
+            <div class="hero-copy">
+                <span class="pill">LEARN · PLAY · GROW</span>
+                <h1>Make learning<br> <span>more exciting.</span></h1>
+                <p>Create your own quizzes, challenge yourself,
+                   and discover how much you know.</p>
+                <div class="hero-actions">
+                    <button class="primary-btn" id="heroCreate">
+                        Create a Quiz ↗
+                    </button>
+                    <button class="secondary-btn" id="heroExplore">
+                        Explore Quizzes
+                    </button>
+                </div>
+                <div class="stats">
+                    <div><strong id="quizCount">0</strong><small>Quizzes</small></div>
+                    <div><strong>4</strong><small>Options per question</small></div>
+                    <div><strong>100%</strong><small>Fun learning</small></div>
+                </div>
+            </div>
+            <div class="hero-art">
+                <div class="art-circle"></div>
+                <div class="quiz-card">
+                    <span class="card-icon">✦</span>
+                    <p>QUICK CHALLENGE</p>
+                    <h3>Ready to test<br>your knowledge?</h3>
+                    <div class="mini-option">A. Absolutely! <b>✓</b></div>
+                    <div class="mini-option">B. Let's go!</div>
+                    <div class="mini-option">C. I'm ready</div>
+                    <div class="progress"><span></span></div>
+                    <small>YOUR NEXT BIG WIN STARTS HERE</small>
+                </div>
+                <span class="floating-star">✳</span>
+            </div>
+        </div>
+
+        <div class="section-heading">
+            <div>
+                <span class="eyebrow">START YOUR JOURNEY</span>
+                <h2>What would you like to do?</h2>
+            </div>
+        </div>
+
+        <div class="action-grid">
+            <article class="action-card purple">
+                <div class="action-icon">✎</div>
+                <h3>Create a quiz</h3>
+                <p>Write questions, add four options, and select the correct answers.</p>
+                <button class="text-btn" id="homeCreateLink">Build your quiz →</button>
+            </article>
+            <article class="action-card green">
+                <div class="action-icon">◎</div>
+                <h3>Take a quiz</h3>
+                <p>Choose a quiz, answer the questions, and check your score instantly.</p>
+                <button class="text-btn" id="homeBrowseLink">Find a quiz →</button>
+            </article>
+        </div>
+    </section>
+
+    <!-- QUIZ CREATION PAGE -->
+    <section id="createPage" class="page hidden">
+        <div class="page-heading">
+            <span class="eyebrow">BUILD SOMETHING GREAT</span>
+            <h1>Create your quiz<span>.</span></h1>
+            <p>Add a title and at least one question to get started.</p>
+        </div>
+
+        <form id="quizForm">
+            <div class="form-panel">
+                <label for="quizTitle">Quiz title</label>
+                <input id="quizTitle" type="text"
+                       placeholder="e.g. JavaScript Basics" required maxlength="80">
+
+                <label for="quizDescription">Description</label>
+                <textarea id="quizDescription" rows="2" maxlength="200"
+                          placeholder="What is this quiz about?"></textarea>
+            </div>
+
+            <div id="questionList"></div>
+
+            <button type="button" class="add-question" id="addQuestion">
+                + Add another question
+            </button>
+
+            <div class="form-actions">
+                <button type="button" class="secondary-btn" id="cancelCreate">
+                    Cancel
+                </button>
+                <button type="submit" class="primary-btn">
+                    Save Quiz ✓
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <!-- QUIZ LISTING PAGE -->
+    <section id="browsePage" class="page hidden">
+        <div class="page-heading">
+            <span class="eyebrow">PICK YOUR CHALLENGE</span>
+            <h1>Explore quizzes<span>.</span></h1>
+            <p>Choose a quiz and see what you know.</p>
+        </div>
+        <div id="quizList" class="quiz-grid"></div>
+    </section>
+
+    <!-- QUIZ TAKING PAGE -->
+    <section id="takePage" class="page hidden">
+        <div class="quiz-topline">
+            <button class="text-btn" id="exitQuiz">← Exit quiz</button>
+            <span id="questionCounter">Question 1 of 1</span>
+        </div>
+        <div class="take-panel">
+            <div class="take-progress"><span id="takeProgress"></span></div>
+            <p class="eyebrow" id="takeQuizTitle">QUIZ TIME</p>
+            <h2 id="questionText">Question goes here</h2>
+            <div id="answerOptions" class="answer-options"></div>
+            <div class="take-actions">
+                <span id="answerHint">Choose one answer</span>
+                <button class="primary-btn" id="nextQuestion" disabled>
+                    Next Question →
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESULTS PAGE -->
+    <section id="resultPage" class="page hidden">
+        <div class="result-panel">
+            <div class="result-icon" id="resultIcon">🏆</div>
+            <span class="eyebrow">QUIZ COMPLETED</span>
+            <h1 id="resultHeading">Well done!</h1>
+            <p id="resultMessage">Here is your result.</p>
+
+            <div class="score-circle">
+                <strong id="scoreValue">0/0</strong>
+                <span id="scorePercent">0%</span>
+            </div>
+
+            <div id="answerReview" class="answer-review"></div>
+
+            <div class="result-actions">
+                <button class="primary-btn" id="retryQuiz">Try Again ↻</button>
+                <button class="secondary-btn" id="resultHome">Go Home</button>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <a href="#" class="logo">Quiz<span>ora.</span></a>
+    <p>Make learning an adventure.</p>
+    <small>© <span id="year"></span> Quizora · Student Project</small>
+</footer>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+</body>
+</html>
